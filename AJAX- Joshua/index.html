@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+ 	<link href="https://fonts.googleapis.com/css?family=Anton|Kanit|Righteous&display=swap" rel="stylesheet">
+
+</head>
+<style >
+	h5{
+		font-family: 'Kanit', sans-serif;
+	}
+	h1{
+		font-family: 'Righteous', cursive;
+
+	}
+</style>
+<body>
+
+<h1 class="text-center mt-3	">Robot friends</h1>
+<div id="form" class="d-flex justify-content-center">
+<input class="form-control w-25 mr-2"  type="search" name="" placeholder="search user">
+<input id="search" type="button" class="btn btn-primary" name="" value="search">
+</div>
+
+
+<div id="display-ajax" class="d-flex flex-sm-column flex-xl-row flex-wrap mt-3 ">
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	
+<script >
+
+	$(document).ready(function (){
+		$("#search").click(function(){
+			console.log("Click Works");
+			fetchData();
+		});
+
+
+		$('#input').keyup(function(){
+			var value = $(this).val().toLowerCase();
+
+
+		})
+
+		function fetchData(){
+			$.ajax({
+				url:"https://jsonplaceholder.typicode.com/users",
+				method:"GET"
+			}).done(function(data){
+				$.each(data, function(){
+					$("#display-ajax").append("<div class='card mr-3 mb-3' style='width:18rem;'><img src=\"https://robohash.org/'"   
+						+this["id"]+ " ?size=200x200\"> <br><h5 class='card-text text-center'>Name: "
+						+this["name"]+ "<h5><p class='card-text text-center'>" 
+						+this["email"]+ "</p> </div>" );
+				})
+			})
+		}
+
+})
+
+
+
+
+
+</script>
+</body>
+</html>
